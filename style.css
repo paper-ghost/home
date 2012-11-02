@@ -1,0 +1,177 @@
+html.no-js .js {
+	display: none !important;	
+}
+* {
+	padding: 0; 
+	margin: 0; 
+	text-rendering: optimizeSpeed;
+	-webkit-font-smoothing: none;
+}
+a {
+	color: red !important;
+	text-decoration: underline;
+}
+.weirdHover{
+cursor:pointer;
+}
+
+a:hover {
+	text-decoration: none;
+}
+body {
+	overflow: hidden;
+	color: #444;
+}
+
+	body * { 
+		font-size: 11px;
+		line-height: 15px;
+		font-family: "Courier New", monospace;
+	} 
+
+h1, h2, p  {	
+	display: inline-block;
+}
+h1 {
+	color: black;
+}
+h2 {
+	font-weight: normal;
+}
+dd {
+	text-indent: -4px;
+}
+dt {
+	/*text-indent: -4px;*/
+	font-style: italic;
+	text-align: right;
+}
+
+button {
+	outline: none;
+	background: red;
+	color: white;
+	font-weight: bold;
+	padding: 6px 7px;
+	border: 1px solid rgb(240, 0, 0);
+	cursor: pointer;
+	-webkit-box-shadow: 	2px 2px 0px 0px rgb(210, 210, 210);
+	-moz-box-shadow: 		2px 2px 0px 0px rgb(210, 210, 210);
+	box-shadow: 			2px 2px 0px 0px rgb(210, 210, 210);
+}
+	button::-moz-focus-inner {
+		border: 0;
+	}
+	button:hover {
+		position: relative;	
+		left: -1px;
+		top: -1px;
+		-webkit-box-shadow: 3px 3px 0px 0px rgb(220, 220, 220);
+		-moz-box-shadow: 	3px 3px 0px 0px rgb(220, 220, 220);
+		box-shadow: 		3px 3px 0px 0px rgb(220, 220, 220);
+	}
+	button:active {
+		position: relative;
+		left: 1px;
+		top: 1px;
+		-webkit-box-shadow: 0px 0px;
+		-moz-box-shadow: 	0px 0px;
+		box-shadow: 		0px 0px;
+	}
+
+
+#fluid {
+	color: blue;
+	white-space: pre;
+	width: auto;
+	height: auto;
+	display: inline-block;
+	cursor: default;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+/*
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+*/
+}
+	#fluid.fading {
+		font-style: italic;
+	}
+	.hacker #fluid {
+		color: ;
+	}
+
+html.js #main { 
+	display: none;
+}
+
+
+#main, #bonus {
+	position: absolute;
+	z-index: 100;
+}
+
+	#main {
+		left: 70px;
+		top: 61px;
+		pointer-events: none;
+	}
+		.overlay {
+			background: white;
+			/*padding: 0 27px 0 22px;*/
+			padding: 0 21px;
+			pointer-events: auto;
+		}
+		#card {
+			width: 287px;
+		}
+		#controls {
+			display: inline-block;
+			/*background: none !important;*/
+		}
+
+	#bonus {
+		right: 20px;
+		bottom: 12px;
+	}
+
+#fps {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	background: white;
+	padding: 10px;
+	display: none;
+}
+
+/* hacker mode */
+body.hackermode,
+body.hackermode .overlay {
+	background: black;
+	color: #ddd;
+}
+body.hackermode h1 {
+	color: Red;
+}
+body.hackermode a,
+body.hackermode #fluid {
+	color: #F7F8F7 !important;
+}
+body.hackermode button {
+	background: #00CC00;
+	border-color: #009900;
+	-webkit-box-shadow: 	none;
+	-moz-box-shadow: 		none;
+	box-shadow: 			none;	
+}
+
+body, .overlay {
+	-webkit-transition: all 0.8s ease-in;
+	-moz-transition: 	all 0.8s ease-in;
+	-o-transition: 		all 0.8s ease-in;
+	transition: 		all 0.8s ease-in;
+}

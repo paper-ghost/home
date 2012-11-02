@@ -1,0 +1,174 @@
+<!doctype HTML>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<title>Timothy David Ellis Dot Com</title>
+	<script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<meta name="keywords" content="">
+	<meta name="description" content="Dont take anything seen on here seriously. Seriously.">
+	<meta name="author" content="Nick Kwiatek">
+	<meta name="copyright" content="2058">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		<div id="card" class="overlay">
+			<br/>
+			<br/>
+			<h1>Timothy Ellis</h1><br/>
+			<h2>LOLZ</h2><br/>
+			<h2>Perth, AU</h2><br/>
+			<br/>
+			&rarr; <a href="mailto:timothy.ellis@iinet.net.au" class="weirdHover">Email me</a><br/>
+			&rarr; <a href="http://twitter.com/ellis_timothy" class="weirdHover">Send me a tweet</a><br/>
+			&rarr; <a href="http://blog.timothydavidellis.com" class="weirdHover">Blog</a><br/>
+			<div class="js">
+				&rarr; <a href="#" id="hackermode" class="weirdHover">Switch it up</a><br/>
+			</div>
+			<br/><br/><dl>
+				<dd>"We have constructed in our civilization a false world of plastic flowers and Astro-Turf, air-conditioning and fluorescent lights, windows that dont open and background music thatnever stops, days when we dont know whetherit has rained, nights when the sky never stops glowing Walkman and Watchmen, entertainment cocoons, frozen food for the microwave oven, sleepy hearts jump-started by caffeine,alcohol, drugs and illusions"<br/><br/></dd>
+				<dt>Al Gore - Ex-US Vice Preident </dt>
+			</dl>
+			<br/>
+			<br/>
+		</div>
+		<br/>
+		<div id="controls" class="overlay js">
+			<br/>
+			<button id="clear">"Don't Press!"</button><br/>
+			<br/>
+		</div>
+	</div>
+	<p id="fluid" class="js" unselectable="on"></p>
+	<div id="fps">fps: 0</div>
+<script type="text/javascript" src="lib/jquery.timers.js"></script>
+<script type="text/javascript" src="lib/running.js"></script>
+<script type="text/javascript" src="lib/fluid.solver.js"></script>
+<script type="text/javascript" src="lib/fluid.display.ascii.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+
+	// forget about IE, just forget about it
+	if (!($.browser.msie && parseInt($.browser.version, 10) < 9)) {
+			
+		var fluid 
+			, el 
+			, display
+			, displayFPS
+		
+		// physics solver
+		
+		fluid = new FluidField();	
+		
+		
+		// display DOM element
+		
+		el = document.getElementById('fluid');
+			
+		$(window)
+			.resize(function(e) {
+				var glyphDims = (function() {
+					var $dummy = $(el).clone().text('M').css({visibility: 'hidden'}).appendTo('body');
+					var retval = {
+						width: 	$dummy.width(),
+						height: parseInt( $dummy.css('line-height'), 10 ) // more reliable than height()
+					};
+					$dummy.remove();
+					return retval;
+				})();
+				
+				// this won't be perfect, as the screen dims won't often be evenly disible
+				fluid.setResolution(Math.round($(window).height() / glyphDims.height), Math.round($(window).width() / glyphDims.width));
+			})
+			.trigger('resize');
+		
+		
+		
+		// display component
+		
+		display = new FluidDisplayASCII(fluid)
+		display.bindElement(el)
+		
+		displayFPS = function() {
+			var frames = 0
+				, time_start = new Date()
+				, $DOMfps = $('#fps')
+
+			$DOMfps.show()
+					
+			return function(frame) {
+				var time_end = new Date()
+
+				frames++
+				
+				
+				if ((time_end - time_start) >= 1000) {		
+					$DOMfps.text('fps: ' + Math.round((1000 * frames / (time_end - time_start))))
+				
+					time_start = time_end
+					frames = 0
+				}
+			}
+		}
+		
+		// final configuration
+		//fluid.setIterations(15);
+		//display.Config.density = 260;
+		fluid.setIterations(5)
+		display.Config.density = 180
+		
+	
+		display.Animation.start( /*displayFPS()*/ )
+	}
+			
+	
+	
+	// rest of initation
+
+	
+	$('#main').hide().fadeTo('slow', 1)
+	
+	
+	$('#clear').mousedown(function(e) {
+		var $el = $(el)
+
+		$el
+			.addClass('fading')
+			.fadeOut('medium', function() {
+				fluid.reset()
+				$el
+					.removeClass('fading')
+					.fadeIn('fast')
+			})
+		
+	})
+
+	// hackermode
+	;(function() {
+		var $body = $('body')
+			, $hackermode = $('#hackermode')
+			, text
+
+		$hackermode.mousedown(function(e) {
+			$body.toggleClass('hackermode')
+			
+			text = $hackermode.text()
+			if (text.search("hacker") != -1) {
+				text = text.replace("hacker", "designer")
+			} 
+			else {
+				text = text.replace("designer", "hacker")
+			}
+			$hackermode.text(text)
+		})
+	}())
+	
+})
+</script>
+
+
+</body>
+
+</html>
